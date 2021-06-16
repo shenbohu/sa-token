@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bohu.dao.UserroleMapper">
+  <resultMap id="BaseResultMap" type="com.bohu.pojo.Userrole">
+    <id column="ROLEID" jdbcType="VARCHAR" property="roleid" />
+    <id column="USERNAME" jdbcType="VARCHAR" property="username" />
+    <result column="FOUNDER" jdbcType="VARCHAR" property="founder" />
+    <result column="CDATE" jdbcType="TIMESTAMP" property="cdate" />
+    <result column="UDATE" jdbcType="TIMESTAMP" property="udate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ROLEID, USERNAME, FOUNDER, CDATE, UDATE
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="com.bohu.pojo.UserroleKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from userrole
+    where ROLEID = #{roleid,jdbcType=VARCHAR}
+      and USERNAME = #{username,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.bohu.pojo.UserroleKey">
+    delete from userrole
+    where ROLEID = #{roleid,jdbcType=VARCHAR}
+      and USERNAME = #{username,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" keyColumn="ROLEID" keyProperty="roleid" parameterType="com.bohu.pojo.Userrole" useGeneratedKeys="true">
+    insert into userrole (USERNAME, FOUNDER, CDATE, 
+      UDATE)
+    values (#{username,jdbcType=VARCHAR}, #{founder,jdbcType=VARCHAR}, #{cdate,jdbcType=TIMESTAMP}, 
+      #{udate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" keyColumn="ROLEID" keyProperty="roleid" parameterType="com.bohu.pojo.Userrole" useGeneratedKeys="true">
+    insert into userrole
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="username != null">
+        USERNAME,
+      </if>
+      <if test="founder != null">
+        FOUNDER,
+      </if>
+      <if test="cdate != null">
+        CDATE,
+      </if>
+      <if test="udate != null">
+        UDATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="founder != null">
+        #{founder,jdbcType=VARCHAR},
+      </if>
+      <if test="cdate != null">
+        #{cdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="udate != null">
+        #{udate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bohu.pojo.Userrole">
+    update userrole
+    <set>
+      <if test="founder != null">
+        FOUNDER = #{founder,jdbcType=VARCHAR},
+      </if>
+      <if test="cdate != null">
+        CDATE = #{cdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="udate != null">
+        UDATE = #{udate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ROLEID = #{roleid,jdbcType=VARCHAR}
+      and USERNAME = #{username,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bohu.pojo.Userrole">
+    update userrole
+    set FOUNDER = #{founder,jdbcType=VARCHAR},
+      CDATE = #{cdate,jdbcType=TIMESTAMP},
+      UDATE = #{udate,jdbcType=TIMESTAMP}
+    where ROLEID = #{roleid,jdbcType=VARCHAR}
+      and USERNAME = #{username,jdbcType=VARCHAR}
+  </update>
+</mapper>

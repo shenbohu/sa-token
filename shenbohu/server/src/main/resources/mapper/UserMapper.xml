@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bohu.dao.UserMapper">
+    <resultMap id="BaseResultMap" type="com.bohu.pojo.User">
+        <id column="username" jdbcType="VARCHAR" property="username"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+        <result column="phone" jdbcType="VARCHAR" property="phone"/>
+        <result column="created" jdbcType="DATE" property="created"/>
+        <result column="updated" jdbcType="DATE" property="updated"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="status" jdbcType="VARCHAR" property="status"/>
+        <result column="isMobileCheck" jdbcType="VARCHAR" property="ismobilecheck"/>
+        <result column="sex" jdbcType="VARCHAR" property="sex"/>
+        <result column="birthday" jdbcType="DATE" property="birthday"/>
+        <result column="lastLoginTime" jdbcType="DATE" property="lastlogintime"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        username
+        , `password`, phone, created, updated , `name`, `status`, isMobileCheck,
+    sex, birthday, lastLoginTime
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from user
+        where username = #{username,jdbcType=VARCHAR}
+    </select>
+    <select id="selectall" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from user
+    </select>
+    <select id="selectByUsernameAdnPassword" resultType="com.bohu.vo.UserVO">
+        select
+        <include refid="Base_Column_List"/>
+        from user
+        where username = #{username,jdbcType=VARCHAR}
+        and password = #{password,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        delete
+        from user
+        where username = #{username,jdbcType=VARCHAR}
+    </delete>
+    <insert id="insert" keyColumn="username" keyProperty="username" parameterType="com.bohu.pojo.User"
+            useGeneratedKeys="true">
+        insert into user (`password`, phone, created,
+                          updated, `name`,
+                          `status`, isMobileCheck, sex,
+                          birthday, lastLoginTime)
+        values (#{password,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{created,jdbcType=DATE},
+                #{updated,jdbcType=DATE}, #{name,jdbcType=VARCHAR},
+                #{status,jdbcType=VARCHAR}, #{ismobilecheck,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR},
+                #{birthday,jdbcType=DATE}, #{lastlogintime,jdbcType=DATE})
+    </insert>
+    <insert id="insertSelective" keyColumn="username" keyProperty="username" parameterType="com.bohu.pojo.User"
+            useGeneratedKeys="true">
+        insert into user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="username != null">
+                `username`,
+            </if>
+            <if test="password != null">
+                `password`,
+            </if>
+            <if test="phone != null">
+                phone,
+            </if>
+            <if test="created != null">
+                created,
+            </if>
+            <if test="updated != null">
+                updated,
+            </if>
+            <if test="name != null">
+                `name`,
+            </if>
+            <if test="status != null">
+                `status`,
+            </if>
+            <if test="ismobilecheck != null">
+                isMobileCheck,
+            </if>
+            <if test="sex != null">
+                sex,
+            </if>
+            <if test="birthday != null">
+                birthday,
+            </if>
+            <if test="lastlogintime != null">
+                lastLoginTime,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="username != null">
+                #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null">
+                #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="created != null">
+                #{created,jdbcType=DATE},
+            </if>
+            <if test="updated != null">
+                #{updated,jdbcType=DATE},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="ismobilecheck != null">
+                #{ismobilecheck,jdbcType=VARCHAR},
+            </if>
+            <if test="sex != null">
+                #{sex,jdbcType=VARCHAR},
+            </if>
+            <if test="birthday != null">
+                #{birthday,jdbcType=DATE},
+            </if>
+            <if test="lastlogintime != null">
+                #{lastlogintime,jdbcType=DATE},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.bohu.pojo.User">
+        update user
+        <set>
+            <if test="password != null">
+                `password` = #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null">
+                phone = #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="created != null">
+                created = #{created,jdbcType=DATE},
+            </if>
+            <if test="updated != null">
+                updated = #{updated,jdbcType=DATE},
+            </if>
+            <if test="name != null">
+                `name` = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                `status` = #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="ismobilecheck != null">
+                isMobileCheck = #{ismobilecheck,jdbcType=VARCHAR},
+            </if>
+            <if test="sex != null">
+                sex = #{sex,jdbcType=VARCHAR},
+            </if>
+            <if test="birthday != null">
+                birthday = #{birthday,jdbcType=DATE},
+            </if>
+            <if test="lastlogintime != null">
+                lastLoginTime = #{lastlogintime,jdbcType=DATE},
+            </if>
+        </set>
+        where username = #{username,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.bohu.pojo.User">
+        update user
+        set `password`    = #{password,jdbcType=VARCHAR},
+            phone         = #{phone,jdbcType=VARCHAR},
+            created       = #{created,jdbcType=DATE},
+            updated       = #{updated,jdbcType=DATE},
+            `name`        = #{name,jdbcType=VARCHAR},
+            `status`      = #{status,jdbcType=VARCHAR},
+            isMobileCheck = #{ismobilecheck,jdbcType=VARCHAR},
+            sex           = #{sex,jdbcType=VARCHAR},
+            birthday      = #{birthday,jdbcType=DATE},
+            lastLoginTime = #{lastlogintime,jdbcType=DATE}
+        where username = #{username,jdbcType=VARCHAR}
+    </update>
+</mapper>

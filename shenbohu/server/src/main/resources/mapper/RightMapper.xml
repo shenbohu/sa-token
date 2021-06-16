@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bohu.dao.RightMapper">
+    <resultMap id="BaseResultMap" type="com.bohu.pojo.Right">
+        <id column="RIGHTID" jdbcType="VARCHAR" property="rightid"/>
+        <result column="CDATE" jdbcType="TIMESTAMP" property="cdate"/>
+        <result column="UDATE" jdbcType="TIMESTAMP" property="udate"/>
+        <result column="FOUNDER" jdbcType="VARCHAR" property="founder"/>
+        <result column="DESCRIPTION" jdbcType="VARCHAR" property="description"/>
+        <result column="NAME" jdbcType="VARCHAR" property="name"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        RIGHTID, CDATE, UDATE, FOUNDER, DESCRIPTION, `NAME`
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from `right`
+        where RIGHTID = #{rightid,jdbcType=VARCHAR}
+    </select>
+    <select id="selectByIds" resultType="com.bohu.vo.RightVO">
+        select
+        r.RIGHTID,r. CDATE, r.UDATE, r.FOUNDER, r.DESCRIPTION, r.`NAME`
+        , o.ROLEID, o.`C`, o.R, o.U, o.D
+        from `right` r, roleright o
+        WHERE r.RIGHTID = o.RIGHTID
+        AND o.ROLEID IN
+        <foreach collection="roleids" item="item" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        delete
+        from `right`
+        where RIGHTID = #{rightid,jdbcType=VARCHAR}
+    </delete>
+    <insert id="insert" keyColumn="RIGHTID" keyProperty="rightid" parameterType="com.bohu.pojo.Right"
+            useGeneratedKeys="true">
+        insert into `right` (CDATE, UDATE, FOUNDER,
+                             DESCRIPTION, `NAME`)
+        values (#{cdate,jdbcType=TIMESTAMP}, #{udate,jdbcType=TIMESTAMP}, #{founder,jdbcType=VARCHAR},
+                #{description,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" keyColumn="RIGHTID" keyProperty="rightid" parameterType="com.bohu.pojo.Right"
+            useGeneratedKeys="true">
+        insert into `right`
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="cdate != null">
+                CDATE,
+            </if>
+            <if test="udate != null">
+                UDATE,
+            </if>
+            <if test="founder != null">
+                FOUNDER,
+            </if>
+            <if test="description != null">
+                DESCRIPTION,
+            </if>
+            <if test="name != null">
+                `NAME`,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="cdate != null">
+                #{cdate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="udate != null">
+                #{udate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="founder != null">
+                #{founder,jdbcType=VARCHAR},
+            </if>
+            <if test="description != null">
+                #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.bohu.pojo.Right">
+        update `right`
+        <set>
+            <if test="cdate != null">
+                CDATE = #{cdate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="udate != null">
+                UDATE = #{udate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="founder != null">
+                FOUNDER = #{founder,jdbcType=VARCHAR},
+            </if>
+            <if test="description != null">
+                DESCRIPTION = #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                `NAME` = #{name,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where RIGHTID = #{rightid,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.bohu.pojo.Right">
+        update `right`
+        set CDATE       = #{cdate,jdbcType=TIMESTAMP},
+            UDATE       = #{udate,jdbcType=TIMESTAMP},
+            FOUNDER     = #{founder,jdbcType=VARCHAR},
+            DESCRIPTION = #{description,jdbcType=VARCHAR},
+            `NAME`      = #{name,jdbcType=VARCHAR}
+        where RIGHTID = #{rightid,jdbcType=VARCHAR}
+    </update>
+</mapper>
