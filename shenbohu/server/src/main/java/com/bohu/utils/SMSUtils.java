@@ -34,8 +34,8 @@ public class SMSUtils {
         final String product = "Dysmsapi";
         final String domain = "dysmsapi.aliyuncs.com";
 
-        final String accessKeyId = "LTAI4Fv3hvv1N1ACDyTFL6ke";// 你的accessKeyId
-        final String accessKeySecret = "g6OTQNt990kV9INWCt9gwZ9pq847Vu";// 你的accessKeySecret
+        final String accessKeyId = "你自己的";// 你的accessKeyId
+        final String accessKeySecret = "你自己的";// 你的accessKeySecret
         IClientProfile profile = DefaultProfile.getProfile("cn-hangzhou", accessKeyId, accessKeySecret);
         try {
             DefaultProfile.addEndpoint("cn-hangzhou", "cn-hangzhou", product, domain);
