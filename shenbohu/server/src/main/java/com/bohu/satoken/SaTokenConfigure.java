@@ -19,12 +19,44 @@ import java.util.Arrays;
  **/
 @Configuration
 public class SaTokenConfigure implements WebMvcConfigurer {
-    // 注册sa-token的注解拦截器，打开注解式鉴权功能
+    // 注册sa-token的拦截器
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         // 注册路由拦截器，自定义验证规则
-        registry.addInterceptor(new SaAnnotationInterceptor()).
-                addPathPatterns("/**").
-                excludePathPatterns("/user/login", "/user/getcode/**/**");
+        registry.addInterceptor(new SaRouteInterceptor((req, res, handler) -> {
+
+            // 登录验证 -- 拦截所有路由，并排除/user/doLogin 用于开放登录
+            SaRouter.match("/**", "/user/login", () -> StpUtil.checkLogin());
+
+            // 登录验证 -- 排除多个路径
+            SaRouter.match(Arrays.asList("/**"), Arrays.asList("/user/login", "/user/getcode/**/**"), () -> StpUtil.checkLogin());
+
+            // 角色认证 -- 拦截以 admin 开头的路由，必须具备[admin]角色或者[super-admin]角色才可以通过认证
+            SaRouter.match("/admin/**", () -> StpUtil.checkRoleOr("admin", "super-admin"));
+
+            // 权限认证 -- 不同模块, 校验不同权限
+            SaRouter.match("/admin/**", () -> StpUtil.checkPermission("admin"));
+            SaRouter.match("/goods/**", () -> StpUtil.checkPermission("goods"));
+            SaRouter.match("/orders/**", () -> StpUtil.checkPermission("orders"));
+            SaRouter.match("/notice/**", () -> StpUtil.checkPermission("notice"));
+            SaRouter.match("/comment/**", () -> StpUtil.checkPermission("comment"));
+
+            // 匹配 restful 风格路由
+            SaRouter.match("/article/get/{id}", () -> StpUtil.checkPermission("article"));
+
+            // 检查请求方式
+            SaRouter.match("/notice/**", () -> {
+                if(req.getMethod().equals(HttpMethod.GET.toString())) {
+                    StpUtil.checkPermission("notice");
+                }
+            });
+
+            // 提前退出
+
+
+
+            // 在多账号模式下，可以使用任意StpUtil进行校
+
+        })).addPathPatterns("/**").excludePathPatterns("/user/login","/user/getcode/**/**");
     }
 }

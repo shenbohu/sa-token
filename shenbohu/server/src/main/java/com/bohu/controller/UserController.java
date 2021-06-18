@@ -19,7 +19,6 @@ import javax.annotation.Resource;
 
 @RestController
 @RequestMapping("/user")
-@SaCheckLogin
 class UserController {
 
 private static final Log log = LogFactory.getLog(UserController.class);
@@ -43,6 +42,7 @@ private static final Log log = LogFactory.getLog(UserController.class);
      **/
 
     @GetMapping(value = "users/{pageNum}/{pageSize}")
+    @SaCheckLogin
     public PageResult findAll(@PathVariable("pageNum") String pageNum, @PathVariable("pageSize") String pageSize) {
         return userService.findAll(pageNum, pageSize);
     }
@@ -55,8 +55,8 @@ private static final Log log = LogFactory.getLog(UserController.class);
      * @return:
      **/
     // 角色认证：当前会话必须具有指定角色标识才能通过
-    @SaCheckRole("admin")
     @GetMapping(value = "userbyid/{id}")
+    @SaCheckLogin
     public Result getUserById(@PathVariable("id") String id) {
         return userService.getUserById(id);
     }

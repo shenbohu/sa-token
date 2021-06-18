@@ -6,6 +6,7 @@ import com.bohu.utils.StatusCode;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,6 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 public class handlerNotLoginException {
     // 全局异常拦截（拦截项目中的NotLoginException异常）
     @ExceptionHandler(NotLoginException.class)
+    @ResponseBody
     public Result handlerNotLoginException(NotLoginException nle, HttpServletRequest request, HttpServletResponse response)
             throws Exception {
 
