@@ -2,6 +2,7 @@ package com.bohu;
 
 
 import cn.dev33.satoken.SaManager;
+import cn.dev33.satoken.quick.SaQuickManager;
 import cn.dev33.satoken.util.SaTokenConsts;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.boot.SpringApplication;
@@ -22,9 +23,13 @@ import tk.mybatis.spring.annotation.MapperScan;
 public class ServiceApplication {
 
 
-    public static void main(String[] args) throws JsonProcessingException {
+    public static void main(String[] args) {
         SpringApplication.run(ServiceApplication.class, args);
         System.out.println("启动成功：sa-token配置如下：" + SaManager.getConfig());
+
+        System.out.println("\n------ 启动成功 ------");
+        System.out.println("name: " + SaQuickManager.getConfig().getName());
+        System.out.println("pwd:  " + SaQuickManager.getConfig().getPwd());
 
     }
 

@@ -4,11 +4,14 @@ package com.bohu.controller;
 import cn.dev33.satoken.annotation.SaCheckLogin;
 import cn.dev33.satoken.annotation.SaCheckPermission;
 import cn.dev33.satoken.annotation.SaCheckRole;
+import cn.dev33.satoken.util.SaTokenConsts;
 import com.bohu.entity.PageResult;
 import com.bohu.entity.Result;
 import com.bohu.pojo.User;
 import com.bohu.service.UserService;
 import com.bohu.vo.UserVO;
+import org.apache.juli.logging.Log;
+import org.apache.juli.logging.LogFactory;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -19,7 +22,7 @@ import javax.annotation.Resource;
 @SaCheckLogin
 class UserController {
 
-
+private static final Log log = LogFactory.getLog(UserController.class);
     @Resource
     private UserService userService;
 
@@ -96,6 +99,4 @@ class UserController {
     Result getcode(@PathVariable String type, @PathVariable String phone) {
         return userService.getcode(type, phone);
     }
-
-
 }

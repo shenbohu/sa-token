@@ -143,5 +143,18 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-pool2</artifactId>
         </dependency>
+        <!-- sa-token整合SpringAOP实现注解鉴权 -->
+        <dependency>
+            <groupId>cn.dev33</groupId>
+            <artifactId>sa-token-spring-aop</artifactId>
+            <version>1.20.0</version>
+        </dependency>
+        <!-- Sa-Token-Quick-Login 插件 -->
+        <dependency>
+            <groupId>cn.dev33</groupId>
+            <artifactId>sa-token-quick-login</artifactId>
+            <version>1.20.0</version>
+        </dependency>
+
     </dependencies>
 </project>
