@@ -39,7 +39,7 @@ class UserController {
      **/
 
     @GetMapping(value = "users/{pageNum}/{pageSize}")
-    @SaCheckLogin
+//    @SaCheckLogin
     public PageResult findAll(@PathVariable("pageNum") String pageNum, @PathVariable("pageSize") String pageSize) {
         return userService.findAll(pageNum, pageSize);
     }
