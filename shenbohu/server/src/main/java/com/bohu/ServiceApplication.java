@@ -2,9 +2,6 @@ package com.bohu;
 
 
 import cn.dev33.satoken.SaManager;
-import cn.dev33.satoken.quick.SaQuickManager;
-import cn.dev33.satoken.util.SaTokenConsts;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
@@ -27,9 +24,9 @@ public class ServiceApplication {
         SpringApplication.run(ServiceApplication.class, args);
         System.out.println("启动成功：sa-token配置如下：" + SaManager.getConfig());
 
-        System.out.println("\n------ 启动成功 ------");
-        System.out.println("name: " + SaQuickManager.getConfig().getName());
-        System.out.println("pwd:  " + SaQuickManager.getConfig().getPwd());
+//        System.out.println("\n------ 启动成功 ------");
+//        System.out.println("name: " + SaQuickManager.getConfig().getName());
+//        System.out.println("pwd:  " + SaQuickManager.getConfig().getPwd());
 
     }
 

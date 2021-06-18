@@ -90,12 +90,6 @@
             <artifactId>pagehelper-spring-boot-starter</artifactId>
             <version>1.2.3</version>
         </dependency>
-        <!--         sa-token 权限认证, 在线文档：http://sa-token.dev33.cn/ -->
-        <dependency>
-            <groupId>cn.dev33</groupId>
-            <artifactId>sa-token-spring-boot-starter</artifactId>
-            <version>1.20.0</version>
-        </dependency>
         <dependency>
             <groupId>com.aliyun</groupId>
             <artifactId>aliyun-java-sdk-core</artifactId>
@@ -133,6 +127,12 @@
 <!--            <version>1.19.0</version>-->
 <!--        </dependency>-->
 <!--       Sa-Token整合redis (使用jdk默认序列化方式) 兼容性好，缺点：Session序列化后基本不可读-->
+        <!--         sa-token 权限认证, 在线文档：http://sa-token.dev33.cn/ -->
+        <dependency>
+            <groupId>cn.dev33</groupId>
+            <artifactId>sa-token-spring-boot-starter</artifactId>
+            <version>1.20.0</version>
+        </dependency>
         <dependency>
             <groupId>cn.dev33</groupId>
             <artifactId>sa-token-dao-redis</artifactId>
@@ -150,11 +150,11 @@
             <version>1.20.0</version>
         </dependency>
         <!-- Sa-Token-Quick-Login 插件 -->
-        <dependency>
-            <groupId>cn.dev33</groupId>
-            <artifactId>sa-token-quick-login</artifactId>
-            <version>1.20.0</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>cn.dev33</groupId>-->
+<!--            <artifactId>sa-token-quick-login</artifactId>-->
+<!--            <version>1.20.0</version>-->
+<!--        </dependency>-->
 
     </dependencies>
 </project>
