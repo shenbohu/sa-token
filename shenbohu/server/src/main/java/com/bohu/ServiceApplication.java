@@ -1,6 +1,8 @@
 package com.bohu;
 
 
+import cn.dev33.satoken.SaManager;
+import cn.dev33.satoken.util.SaTokenConsts;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -22,7 +24,7 @@ public class ServiceApplication {
 
     public static void main(String[] args) throws JsonProcessingException {
         SpringApplication.run(ServiceApplication.class, args);
-//        System.out.println("启动成功：sa-token配置如下：" + satoken.getConfig());
+        System.out.println("启动成功：sa-token配置如下：" + SaManager.getConfig());
 
     }
 

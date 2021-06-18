@@ -1,6 +1,7 @@
 package com.bohu.service.impl;
 
 
+import cn.dev33.satoken.secure.SaSecureUtil;
 import cn.dev33.satoken.session.SaSession;
 import cn.dev33.satoken.stp.SaTokenInfo;
 import cn.dev33.satoken.stp.StpUtil;
@@ -72,7 +73,7 @@ public class UserServiceImpl implements UserService {
             if (StringUtils.isEmpty(user.getPassword())) {
                 return new Result(false, StatusCode.ERROR, "");
             }
-            user.setPassword(MD5Utils.md5(user.getPassword()));
+            user.setPassword(SaSecureUtil.md5(user.getPassword()));
             user.setCreated(new Date());
             user.setStatus("0");
             userMapper.insertSelective(user);
@@ -134,7 +135,8 @@ public class UserServiceImpl implements UserService {
         if (org.apache.commons.lang.StringUtils.isEmpty(password)) {
             throw new RuntimeException("请输入密码");
         }
-        password = MD5Utils.md5(password);
+//        password = MD5Utils.md5(password);
+        password = SaSecureUtil.md5(password);
         UserVO userVO = userMapper.selectByUsernameAdnPassword(username, password);
         if (userVO == null) {
             return new Result(false, StatusCode.ERROR, "userVO");

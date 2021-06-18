@@ -17,8 +17,6 @@ public class EurekaApplication  extends SpringBootServletInitializer {
         // DateUtil 第三方jar包中的类
         Date now = DateUtil.now();
         System.out.println("当前时间：" + now);
-
-        System.out.println("===========程 序 关 闭===========");
         SpringApplication.run(EurekaApplication.class, args);
     }
 

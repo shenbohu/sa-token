@@ -16,6 +16,7 @@ import javax.annotation.Resource;
 
 @RestController
 @RequestMapping("/user")
+@SaCheckLogin
 class UserController {
 
 
@@ -39,7 +40,6 @@ class UserController {
      **/
 
     @GetMapping(value = "users/{pageNum}/{pageSize}")
-//    @SaCheckLogin
     public PageResult findAll(@PathVariable("pageNum") String pageNum, @PathVariable("pageSize") String pageSize) {
         return userService.findAll(pageNum, pageSize);
     }

@@ -1,13 +1,13 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/bohu?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
     username: root
-    password: hu950812
 
-
-    #url: jdbc:mysql://10.211.55.8:3306/bohu?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
-    #password: bohu0812
     #url: jdbc:mysql://localhost:3306/bohu?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
-    #username: root
+    #password: hu950812
+
+
+    url: jdbc:mysql://10.211.55.8:3306/bohu?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+    password: bohu0812
+
 
