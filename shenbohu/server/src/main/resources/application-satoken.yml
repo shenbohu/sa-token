@@ -22,9 +22,8 @@ spring:
 #    tokenPrefix: Bearer
     is-log: false
     # 写入Cookie时显式指定的作用域, 用于单点登录二级域名共享Cookie
-#    cookie-domain: stp.com
+    cookie-domain: stp.com
     # Sa-Token-Quick-Login 配置
-# Sa-Token-Quick-Login 配置
 #sa:
 #  # 登录账号
 #  name: s

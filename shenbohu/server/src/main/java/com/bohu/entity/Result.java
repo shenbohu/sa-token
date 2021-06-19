@@ -12,14 +12,28 @@ public class Result<T> {
     private boolean flag;//是否成功
     private Integer code;//返回码
     private String message;//返回消息
+    private ResultEnum resultEnum;
 
     private T data;//返回数据
+
+    public Result(ResultEnum enumValue, Object data) {
+        this.flag = enumValue.getType();
+        this.code = enumValue.getCode();
+        this.message = enumValue.getMessage();
+        this.data = (T)data;
+    }
 
     public Result(boolean flag, Integer code, String message, Object data) {
         this.flag = flag;
         this.code = code;
         this.message = message;
         this.data = (T)data;
+    }
+
+    public Result(ResultEnum enumValue) {
+        this.flag = enumValue.getType();
+        this.code = enumValue.getCode();
+        this.message = enumValue.getMessage();
     }
 
     public Result(boolean flag, String massage) {

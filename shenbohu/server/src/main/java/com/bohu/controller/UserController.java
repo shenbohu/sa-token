@@ -4,6 +4,7 @@ package com.bohu.controller;
 import cn.dev33.satoken.annotation.SaCheckLogin;
 import cn.dev33.satoken.annotation.SaCheckPermission;
 import cn.dev33.satoken.annotation.SaCheckRole;
+import cn.dev33.satoken.stp.StpUtil;
 import cn.dev33.satoken.util.SaTokenConsts;
 import com.bohu.entity.PageResult;
 import com.bohu.entity.Result;
@@ -28,7 +29,7 @@ private static final Log log = LogFactory.getLog(UserController.class);
     @RequestMapping("/login")
     @ResponseBody
     public Result login(String username, String password) {
-        return userService.userLogn(username, password);
+        return userService. userLogn(username, password);
 
     }
 
@@ -54,7 +55,6 @@ private static final Log log = LogFactory.getLog(UserController.class);
      * @Param: [id]
      * @return:
      **/
-    // 角色认证：当前会话必须具有指定角色标识才能通过
     @GetMapping(value = "userbyid/{id}")
     @SaCheckLogin
     public Result getUserById(@PathVariable("id") String id) {

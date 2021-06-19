@@ -152,7 +152,7 @@ public class UserServiceImpl implements UserService {
             rightVOS = rightMapper.selectByIds(roleids);
             userVO.setRightVOS(rightVOS);
         }
-        StpUtil.setLoginId(username, String.valueOf(false));// 在用户账号密码验证成功后，直接调用以下API进行登录授权
+        StpUtil.login(username);// 在用户账号密码验证成功后，直接调用以下API进行登录授权
         SaSession session = StpUtil.getSession();// 获取当前账号id的Session
         String tokenValueByLoginId = StpUtil.getTokenValueByLoginId(username);// 获取账号id为username的token令牌值
         SaTokenInfo tokenInfo = StpUtil.getTokenInfo();//返回当前会话的token详细参数
