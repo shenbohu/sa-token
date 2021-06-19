@@ -23,10 +23,10 @@ import org.springframework.stereotype.Component;
 @Data
 public class SMSUtils implements InitializingBean {
 
-    @Value("${aliyun.smsutils.keysecret}")
+    @Value("${aliyun.keysecret}")
     private  String keysecret;
 
-    @Value("${aliyun.smsutils.keyid}")
+    @Value("${aliyun.keyid}")
     private  String keyId;
 
 

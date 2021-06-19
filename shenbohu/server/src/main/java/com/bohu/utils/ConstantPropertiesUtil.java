@@ -10,10 +10,10 @@ public class ConstantPropertiesUtil implements InitializingBean {
     @Value("${aliyun.oss.file.endpoint}")
     private String endPoint;
 
-    @Value("${aliyun.oss.file.keyid}")
+    @Value("${aliyun.keyid}")
     private String keyId;
 
-    @Value("${aliyun.oss.file.keysecret}")
+    @Value("${aliyun.keysecret}")
     private String keySecret;
 
     @Value("${aliyun.oss.file.bucketname}")

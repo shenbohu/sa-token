@@ -1,14 +1,12 @@
 #不同的服务器，地址不同
 aliyun:
+  keyid: 你的
+  keysecret: 你的
   oss:
     file:
       endpoint: oss-cn-hangzhou.aliyuncs.com
-      keyid: 你的
-      keysecret: 你的
       bucketname: shenbohu
   smsutils:
-      keyid: 你的
-      keysecret: 你的
       SignName: 博虎
       templateCode:
         validate_codez: SMS_175061136 #发送短信验证码
