@@ -8,6 +8,10 @@ import com.aliyuncs.http.MethodType;
 import com.aliyuncs.profile.DefaultProfile;
 import com.aliyuncs.profile.IClientProfile;
 import com.netflix.client.ClientException;
+import lombok.Data;
+import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 /**
  * @ClassName SMSUtils
@@ -15,9 +19,21 @@ import com.netflix.client.ClientException;
  * @Date 2021/6/139:57 下午
  * @Version 1.0
  **/
-public class SMSUtils {
-    public static final String VALIDATE_CODE = "SMS_175061136";//发送短信验证码
-    public static final String ORDER_NOTICE = "SMS_175051399";
+@Component
+@Data
+public class SMSUtils implements InitializingBean {
+
+    @Value("${aliyun.smsutils.keysecret}")
+    private  String keysecret;
+
+    @Value("${aliyun.smsutils.keyid}")
+    private  String keyId;
+
+
+    public static String KEYID;
+    public static String KEYSECRET;
+//    public static final String VALIDATE_CODE = "SMS_175061136";//发送短信验证码
+//    public static final String ORDER_NOTICE = "SMS_175051399";
     //........
 
     /**
@@ -34,8 +50,8 @@ public class SMSUtils {
         final String product = "Dysmsapi";
         final String domain = "dysmsapi.aliyuncs.com";
 
-        final String accessKeyId = "你的";// 你的accessKeyId
-        final String accessKeySecret = "你的";// 你的accessKeySecret
+        final String accessKeyId = KEYID;// 你的accessKeyId
+        final String accessKeySecret = KEYSECRET;// 你的accessKeySecret
         IClientProfile profile = DefaultProfile.getProfile("cn-hangzhou", accessKeyId, accessKeySecret);
         try {
             DefaultProfile.addEndpoint("cn-hangzhou", "cn-hangzhou", product, domain);
@@ -65,5 +81,12 @@ public class SMSUtils {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        KEYID = keyId;
+        KEYSECRET = keysecret;
+
     }
 }

@@ -4,7 +4,7 @@ spring:
   application:
     name: server
   profiles:
-    active: mysql,redis,satoken,wecah
+    active: mysql,redis,satoken,wecah,aliyun
 eureka:
   client:
     service-url:

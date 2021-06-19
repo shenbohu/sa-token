@@ -10,6 +10,7 @@ import com.bohu.dao.RoleMapper;
 import com.bohu.dao.UserMapper;
 import com.bohu.entity.PageResult;
 import com.bohu.entity.Result;
+import com.bohu.entity.YmlConfig;
 import com.bohu.pojo.Role;
 import com.bohu.pojo.User;
 import com.bohu.service.UserService;
@@ -21,8 +22,12 @@ import com.bohu.vo.RightVO;
 import com.bohu.vo.UserVO;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
@@ -43,6 +48,8 @@ import java.util.concurrent.TimeUnit;
  **/
 @Service
 @Transactional
+@Configuration
+@Data
 public class UserServiceImpl implements UserService {
     @Resource
     private UserMapper userMapper;
@@ -52,6 +59,10 @@ public class UserServiceImpl implements UserService {
     private RoleMapper roleMapper;
     @Resource
     private RightMapper rightMapper;
+
+    @Autowired
+    private YmlConfig ymlConfig;
+
 
 
     @Override
@@ -108,7 +119,11 @@ public class UserServiceImpl implements UserService {
         Integer integer = ValidateCodeUtils.generateValidateCode(6);
         try {
             if (Objects.equals("JH", type)) {
-                boolean b = SMSUtils.sendShortMessage("SMS_175061136", phone, integer.toString(), "博虎");
+                boolean b = SMSUtils.sendShortMessage(ymlConfig.getSmsutils()
+                        .get("templateCode.validate_codez"),
+                        phone, integer.toString()
+                        ,ymlConfig.getSmsutils().get("SignName")
+                );
                 if (b) {
                     redisTemplate.opsForValue().set(phone + "JH", integer.toString(), 5, TimeUnit.MINUTES);
                 } else {
