@@ -2,13 +2,22 @@ package com.bohu.controller;
 
 import com.aliyun.oss.OSS;
 import com.aliyun.oss.OSSClient;
+import com.aliyun.oss.OSSClientBuilder;
+import com.aliyun.oss.model.GetObjectRequest;
+import com.aliyun.oss.model.OSSObject;
 import com.bohu.entity.R;
+import com.bohu.entity.Result;
 import com.bohu.utils.ConstantPropertiesUtil;
 import org.joda.time.DateTime;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.BufferedReader;
+import java.io.File;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -20,7 +29,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/user/oss")
 @CrossOrigin // 解决跨域
-public class FileUploadController {
+public class FileController {
 
     /**
      * 上传文件
@@ -28,7 +37,7 @@ public class FileUploadController {
      * @return
      */
     @PostMapping("upload")
-    public R uploadTeacherImg(@RequestParam("file") MultipartFile file) {
+    public Result uploadTeacherImg(@RequestParam("file") MultipartFile file) {
         // 地域节点
         String endpoint = ConstantPropertiesUtil.ENDPOINT;
         // 云账号AccessKey有所有API访问权限，建议遵循阿里云安全最佳实践，创建并使用RAM子账号进行API访问或日常运维，请登录 https://ram.console.aliyun.com 创建。
@@ -38,8 +47,8 @@ public class FileUploadController {
         String yourBucketName = ConstantPropertiesUtil.BUCKETNAME;
 
         try {
-            // 1.获取上传文件 MultipartFile file
-            // @RequestParam("file") file 与表单输入项的name值保持一致
+//             1.获取上传文件 MultipartFile file
+//             @RequestParam("file") file 与表单输入项的name值保持一致
 
             // 2.获取上传文件名称，获取上传文件输入流
             String fileName = file.getOriginalFilename();
@@ -68,11 +77,41 @@ public class FileUploadController {
 
             // 返回上传之后的oss存储路径
             String path = "http://" + yourBucketName + "." + endpoint + "/" + fileName;
-
-            return R.ok().data("imgurl", path);
+            Map mapfile = new HashMap();
+            mapfile.put("imgurl", path);
+            mapfile.put("fileName", fileName);
+            return Result.ok(mapfile);
         } catch (Exception e) {
             e.printStackTrace();
-            return R.error();
+            return Result.error();
         }
     }
+
+    /***
+     * @Description:
+     * @Author: shenbohu
+     * @Date: 2021/6/20 12:18 下午
+     * @Param: [url]
+     * @return: 下载文件到本地
+     **/
+    @PostMapping(value = "/download")
+    public Result downloadTeacherImg(@RequestParam("url") String url) throws Exception {
+        String endpoint = ConstantPropertiesUtil.ENDPOINT;
+        String accessKeyId = ConstantPropertiesUtil.KEYID;
+        String accessKeySecret = ConstantPropertiesUtil.KEYSECRET;
+        String bucketName = ConstantPropertiesUtil.BUCKETNAME;
+        String objectName = url;
+        OSS ossClient = new OSSClientBuilder().build(endpoint, accessKeyId, accessKeySecret);
+        String uuid = url.substring(0, url.lastIndexOf("."));
+        url = url.substring(url.lastIndexOf("/") + 1);
+        if (uuid.length() > 47 && url.length() > 36) {
+            url = url.substring(36);
+        }
+        ossClient.getObject(new GetObjectRequest(bucketName, objectName), new File("/Users/shenbohu/Downloads/" + url));
+        ossClient.shutdown();
+        return Result.ok();
+
+        //imgurl:http://shenbohu.oss-cn-hangzhou.aliyuncs.com/2021/06/20/65481890-d793-4571-893d-3548b59e236a需求汇总.xlsx"
+    }
+
 }

@@ -3,6 +3,8 @@ package com.bohu.entity;
 import com.bohu.utils.StatusCode;
 import lombok.Data;
 
+import java.util.Objects;
+
 /**
  * 返回结果实体类
  */
@@ -20,14 +22,48 @@ public class Result<T> {
         this.flag = enumValue.getType();
         this.code = enumValue.getCode();
         this.message = enumValue.getMessage();
-        this.data = (T)data;
+        this.data = (T) data;
+    }
+
+    public static Result ok(Object data) {
+        Result r = new Result();
+        r.setFlag(true);
+        r.setCode(StatusCode.OK);
+        r.setMessage(MessageConstant.OK);
+        r.setData(data);
+        return r;
+    }
+
+    public static Result ok() {
+        Result r = new Result();
+        r.setFlag(true);
+        r.setCode(StatusCode.OK);
+        r.setMessage(MessageConstant.OK);
+        return r;
+    }
+
+    public static Result error(Object data) {
+        Result r = new Result();
+        r.setFlag(true);
+        r.setCode(StatusCode.ERROR);
+        r.setMessage(MessageConstant.ERROR);
+        r.setData(data);
+        return r;
+    }
+
+    public static Result error() {
+        Result r = new Result();
+        r.setFlag(true);
+        r.setCode(StatusCode.ERROR);
+        r.setMessage(MessageConstant.ERROR);
+        return r;
     }
 
     public Result(boolean flag, Integer code, String message, Object data) {
         this.flag = flag;
         this.code = code;
         this.message = message;
-        this.data = (T)data;
+        this.data = (T) data;
     }
 
     public Result(ResultEnum enumValue) {
@@ -41,16 +77,17 @@ public class Result<T> {
         this.message = message;
 
     }
+
     public Result(boolean flag, Integer code, String message) {
         this.flag = flag;
         this.code = code;
         this.message = message;
     }
 
-    public Result(boolean flag ,Integer code ,Object data) {
+    public Result(boolean flag, Integer code, Object data) {
         this.flag = flag;
         this.code = code;
-        this.data = (T)data;
+        this.data = (T) data;
     }
 
     public Result() {
