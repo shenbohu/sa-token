@@ -1,4 +1,4 @@
-package com.bohu.dao;
+package com.bohu.dao.Appstore;
 
 import com.bohu.pojo.Role;
 import org.apache.ibatis.annotations.Mapper;

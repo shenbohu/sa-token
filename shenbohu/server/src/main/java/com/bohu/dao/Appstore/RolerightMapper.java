@@ -1,10 +1,10 @@
-package com.bohu.dao;
+package com.bohu.dao.Appstore;
 
 import com.bohu.pojo.Roleright;
 import com.bohu.pojo.RolerightKey;
-import org.apache.ibatis.annotations.Mapper;
+//import org.apache.ibatis.annotations.Mapper;
 
-@Mapper
+//@Mapper
 public interface RolerightMapper {
     int deleteByPrimaryKey(RolerightKey key);
 

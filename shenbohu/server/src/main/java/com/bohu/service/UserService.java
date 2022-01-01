@@ -21,5 +21,6 @@ public interface UserService {
     Result userLogn(String username, String password);
 
 
+    Result getcodeh();
 
 }

@@ -3,7 +3,7 @@ package com.bohu.satoken;
 
 import cn.dev33.satoken.stp.StpInterface;
 import cn.dev33.satoken.stp.StpUtil;
-import com.bohu.dao.RoleMapper;
+import com.bohu.dao.Appstore.RoleMapper;
 import com.bohu.pojo.Role;
 import com.bohu.vo.RightVO;
 import org.springframework.beans.factory.annotation.Autowired;

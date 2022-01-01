@@ -7,14 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.Map;
 
-/**
- * 描述
- *
- * @author www.itheima.com
- * @version 1.0
- * @package com.changgou.pay.service *
- * @since 1.0
- */
+
 public interface WeixinPayService {
     /**
      * 生成二维码

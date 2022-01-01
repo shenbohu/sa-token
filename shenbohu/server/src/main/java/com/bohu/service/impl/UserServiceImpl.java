@@ -5,16 +5,22 @@ import cn.dev33.satoken.secure.SaSecureUtil;
 import cn.dev33.satoken.session.SaSession;
 import cn.dev33.satoken.stp.SaTokenInfo;
 import cn.dev33.satoken.stp.StpUtil;
-import com.bohu.dao.RightMapper;
-import com.bohu.dao.RoleMapper;
-import com.bohu.dao.UserMapper;
+//import com.baomidou.dynamic.datasource.annotation.DS;
+import com.bohu.dao.Appstore.OrderMapper;
+import com.bohu.dao.Appstore.RightMapper;
+import com.bohu.dao.Appstore.RoleMapper;
+import com.bohu.dao.Appstore.UserMapper;
+import com.bohu.dao.Business.CorditsMapper;
 import com.bohu.entity.PageResult;
 import com.bohu.entity.Result;
 import com.bohu.entity.YmlConfig;
+import com.bohu.feign.corditsfeign;
+import com.bohu.feign.pojo.cordits;
+import com.bohu.pojo.Cordits;
+import com.bohu.pojo.Order;
 import com.bohu.pojo.Role;
 import com.bohu.pojo.User;
 import com.bohu.service.UserService;
-import com.bohu.utils.MD5Utils;
 import com.bohu.utils.SMSUtils;
 import com.bohu.utils.StatusCode;
 import com.bohu.utils.ValidateCodeUtils;
@@ -23,20 +29,19 @@ import com.bohu.vo.UserVO;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import lombok.Data;
+import lombok.SneakyThrows;
+import org.bouncycastle.jcajce.provider.digest.MD5;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 
@@ -47,8 +52,7 @@ import java.util.concurrent.TimeUnit;
  * @Version 1.0
  **/
 @Service
-@Transactional
-@Configuration
+//@Configuration
 @Data
 public class UserServiceImpl implements UserService {
     @Resource
@@ -62,6 +66,16 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private YmlConfig ymlConfig;
+
+    @Autowired
+    private corditsfeign corditsfeign;
+
+    @Resource
+    private CorditsMapper corditsMapper;
+
+    @Autowired
+    private OrderMapper orderMapper;
+
 
 
 
@@ -79,6 +93,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    //@GlobalTransactional
+   //@DS("gits_sharding")
     public Result createUser(User user) {
         try {
             if (StringUtils.isEmpty(user.getPassword())) {
@@ -88,8 +104,24 @@ public class UserServiceImpl implements UserService {
             user.setCreated(new Date());
             user.setStatus("0");
             userMapper.insertSelective(user);
+            Cordits cordits = new Cordits();
+            cordits.setUserid(user.getUsername());
+            cordits.setNum("30");
+            cordits.setId(UUID.randomUUID().toString());
+            //corditsfeign.createcrodits(cordits);
+            corditsMapper.insert(cordits);
+
+            for (int i = 0; i < 10; i++) {
+                Order order = new Order();
+                order.setType("111");
+                order.setOid(Integer.toString(i));
+                orderMapper.insert(order);
+            }
+
+
         } catch (Exception e) {
-            return new Result(false, StatusCode.USERNAME);
+            e.printStackTrace();
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
         return new Result(true, StatusCode.OK, user);
     }
@@ -120,9 +152,9 @@ public class UserServiceImpl implements UserService {
         try {
             if (Objects.equals("JH", type)) {
                 boolean b = SMSUtils.sendShortMessage(ymlConfig.getSmsutils()
-                        .get("templateCode.validate_codez"),
+                                .get("templateCode.validate_codez"),
                         phone, integer.toString()
-                        ,ymlConfig.getSmsutils().get("SignName")
+                        , ymlConfig.getSmsutils().get("SignName")
                 );
                 if (b) {
                     redisTemplate.opsForValue().set(phone + "JH", integer.toString(), 5, TimeUnit.MINUTES);
@@ -187,5 +219,14 @@ public class UserServiceImpl implements UserService {
         }
 
         return new Result(true, StatusCode.OK, userVO);
+    }
+
+
+    @SneakyThrows
+    @Override
+    public Result getcodeh() {
+        String h212 = "##0136ST=32;CN=2011;PW=123456;MN=LD130133000015;CP=&&DataTime=20160824003817;B01-Rtd=36.91;011-Rtd=231.0,011-Flag=N;060-Rtd=1.803,060-Flag=N&&4980\r\n";
+
+        return new Result(true, StatusCode.OK, h212);
     }
 }

@@ -1,5 +1,6 @@
 package com.bohu.utils;
 
+import com.aliyuncs.utils.StringUtils;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -114,6 +115,9 @@ public class POIUtils {
         }
         //如果当前单元格内容为日期类型，需要特殊处理
         String dataFormatString = cell.getCellStyle().getDataFormatString();
+        if (dataFormatString == null) {
+            return cellValue;
+        }
         if(dataFormatString.equals("m/d/yy")){
             cellValue = new SimpleDateFormat(DATE_FORMAT).format(cell.getDateCellValue());
             return cellValue;

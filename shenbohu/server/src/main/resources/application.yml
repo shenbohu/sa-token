@@ -3,17 +3,26 @@ server:
 spring:
   application:
     name: server
+  cloud:
+    alibaba:
+      seata:
+        tx-service-group: test_tx_group
   profiles:
-    active: mysql,redis,satoken,wecah,aliyun
+    active: redis,satoken,wecah,aliyun ,mysql
 eureka:
   client:
     service-url:
       defaultZone: http://127.0.0.1:6868/eureka
   instance:
-    prefer-ip-address: true
+    prefer-ip-address: false
 feign:
   hystrix:
-    enabled: true
+    enabled: false
+    command:
+      default:
+        execution:
+          timeout:
+            enabled: false
 mybatis:
   configuration:
     map-underscore-to-camel-case: true #自动将以下画线方式命名的数据库列映射到 Java 对象的驼峰式命名属性中
@@ -22,3 +31,34 @@ mybatis:
 #logging:
 #  level:
 #    com: debug  # 不加这个MyBatis Log插件不打印sql语句   trace info warn error debug
+
+
+#server:
+#  port: 8089
+#spring:
+#  application:
+#    name: nacos-provider
+#  cloud:
+#    nacos:
+#      discovery:
+#        #指定nacos注册中心地址
+#        server-addr: 127.0.0.1:8848
+
+
+ribbon:
+  OkToRetryOnAllOperations: false #对所有操作请求都进行重试,默认false
+  ReadTimeout: 10000   #负载均衡超时时间，默认值5000
+  ConnectTimeout: 10000 #ribbon请求连接的超时时间，默认值2000
+  MaxAutoRetries: 0     #对当前实例的重试次数，默认0
+  MaxAutoRetriesNextServer: 1 #对切换实例的重试次数，默认1
+
+hystrix:
+  command:
+    default:  #default全局有效，service id指定应用有效
+      execution:
+        timeout:
+          #如果enabled设置为false，则请求超时交给ribbon控制,为true,则超时作为熔断根据
+          enabled: true
+        isolation:
+          thread:
+            timeoutInMilliseconds: 10000 #断路器超时时间，默认1000ms

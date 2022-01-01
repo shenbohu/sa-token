@@ -25,14 +25,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-/**
- * 描述
- *
- * @author www.itheima.com
- * @version 1.0
- * @package com.changgou.pay *
- * @since 1.0
- */
+
 @RestController
 @RequestMapping("/weixin/pay")
 public class WeixinPayController {

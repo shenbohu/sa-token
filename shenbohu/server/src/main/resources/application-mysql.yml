@@ -1,9 +1,14 @@
 spring:
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    username: root
-    url: jdbc:mysql://localhost:3306/bohu?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
-#    url: jdbc:mysql://10.211.55.8:3306/bohu?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
-    password: bohu0812
-
+    names: appstore , business
+    appstore:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      username: root
+      password: bohu0812
+      jdbc-url: jdbc:mysql://localhost:3306/appstore?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+    business:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      username: root
+      password: bohu0812
+      jdbc-url: jdbc:mysql://localhost:3306/business?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
 

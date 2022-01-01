@@ -3,7 +3,9 @@ package com.bohu;
 
 import cn.dev33.satoken.SaManager;
 //import cn.dev33.satoken.quick.SaQuickManager;
+//import org.apache.shardingsphere.shardingjdbc.spring.boot.SpringBootConfiguration;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
@@ -13,10 +15,12 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import tk.mybatis.spring.annotation.MapperScan;
 
 
-@SpringBootApplication
+
+@SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
+//@SpringBootApplication(exclude = SpringBootConfiguration.class)
 @EnableEurekaClient //开启Eureka客户端
-@MapperScan("com.bohu.dao")
-@EnableFeignClients
+//@MapperScan("com.bohu.dao")
+@EnableFeignClients(basePackages = "com.bohu.feign")
 @EnableDiscoveryClient
 public class ServiceApplication {
 

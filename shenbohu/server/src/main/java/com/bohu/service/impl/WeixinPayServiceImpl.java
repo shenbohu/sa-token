@@ -19,6 +19,7 @@ import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.HashMap;
@@ -63,6 +64,10 @@ public class WeixinPayServiceImpl implements WeixinPayService {
                                HttpServletRequest request,
                                HttpSession session) {
         try {
+
+            //Font FontChinese = new Font(bfChinese, 12, Font.NORMAL);
+
+
             //1.创建参数对象(map) 用于组合参数
             Map<String, String> paramMap = new HashMap<>();
             String ip = request.getHeader("x-forwarded-for");

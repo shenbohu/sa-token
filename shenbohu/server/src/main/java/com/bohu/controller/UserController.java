@@ -70,7 +70,7 @@ private static final Log log = LogFactory.getLog(UserController.class);
      * @return: 用户注册
      **/
     // 权限认证：当前会话必须具有指定权限才能通过 user-get
-    @SaCheckPermission("user-add")
+   // @SaCheckPermission("user-add")
     @PostMapping(value = "createUser")
     Result createUser(@RequestBody User user) {
         return userService.createUser(user);
@@ -98,5 +98,10 @@ private static final Log log = LogFactory.getLog(UserController.class);
     @GetMapping(value = "getcode/{type}/{phone}")
     Result getcode(@PathVariable String type, @PathVariable String phone) {
         return userService.getcode(type, phone);
+    }
+
+    @GetMapping(value = "gethj")
+    Result getcodeh() {
+        return userService.getcodeh();
     }
 }

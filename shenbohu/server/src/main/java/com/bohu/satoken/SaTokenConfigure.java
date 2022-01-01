@@ -1,4 +1,4 @@
-//package com.bohu.satoken;
+package com.bohu.satoken;
 //
 //import cn.dev33.satoken.interceptor.SaAnnotationInterceptor;
 //import cn.dev33.satoken.interceptor.SaRouteInterceptor;
