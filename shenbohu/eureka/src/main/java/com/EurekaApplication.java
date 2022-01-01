@@ -1,4 +1,4 @@
-package com.bohu;
+package com;
 
 import org.assertj.core.util.DateUtil;
 import org.springframework.boot.SpringApplication;

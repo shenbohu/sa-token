@@ -1,0 +1,35 @@
+server:
+  port: 8082
+spring:
+  application:
+    name: business
+  profiles:
+    active: mysql,redis,satoken
+  cloud:
+    alibaba:
+      seata:
+        tx-service-group: test_tx_group
+    loadbalancer:
+      retry:
+        enabled: false
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:6868/eureka
+  instance:
+    prefer-ip-address: true
+feign:
+  hystrix:
+    enabled: false
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true #自动将以下画线方式命名的数据库列映射到 Java 对象的驼峰式命名属性中
+  mapper-locations: classpath:mapper/*Mapper.xml
+  type-aliases-package: com.bohu.pojo
+#logging:
+#  level:
+#    com: debug  # 不加这个MyBatis Log插件不打印sql语句   trace info warn error debug
+
+
+
+

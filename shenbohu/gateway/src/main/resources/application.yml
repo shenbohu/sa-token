@@ -3,6 +3,10 @@ spring:
     name: gateway-web
   cloud:
     gateway:
+      discovery:
+        locator:
+          enabled: true
+          lowerCaseServiceId: true
       globalcors:
         cors-configurations:
           '[/**]': # 匹配所有请求
@@ -16,7 +20,23 @@ spring:
         - id: server   # 唯一标识符
           uri: http://localhost:8081
           predicates:
-            - Path=/server/**
+            - Path=/server/user/**
+          filters:
+            - StripPrefix=1
+            - name: RequestRateLimiter #请求数限流 名字不能随便写 ，使用默认的factory
+              args:
+                # 用户身份唯一标识符
+                #                key-resolver: "#{@ipKeyResolver}"
+                # 允许用户每秒执行多少请求，而不会丢弃任何请求。这是令牌桶填充的速率
+                redis-rate-limiter.replenishRate: 1
+                # 令牌桶的容量，允许在一秒钟内完成的最大请求数
+                redis-rate-limiter.burstCapacity: 1
+
+        - id: business   # 唯一标识符
+          uri: http://localhost:8082
+          predicates:
+            - Path=/business/cordits/**
+
           filters:
             - StripPrefix=1
             - name: RequestRateLimiter #请求数限流 名字不能随便写 ，使用默认的factory
@@ -50,3 +70,16 @@ management:
     web:
       exposure:
         include: true
+
+#hystrix的超时时间
+
+
+
+ribbon:
+  OkToRetryOnAllOperations: false #对所有操作请求都进行重试,默认false
+  ReadTimeout: 5000   #负载均衡超时时间，默认值5000
+  ConnectTimeout: 3000 #ribbon请求连接的超时时间，默认值2000
+  MaxAutoRetries: 0     #对当前实例的重试次数，默认0
+  MaxAutoRetriesNextServer: 1 #对切换实例的重试次数，默认1
+
+

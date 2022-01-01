@@ -17,6 +17,8 @@
         <module>eureka</module>
         <module>server</module>
         <module>gateway</module>
+        <module>business</module>
+        <module>nacos</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
