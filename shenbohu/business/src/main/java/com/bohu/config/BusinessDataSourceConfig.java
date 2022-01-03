@@ -17,14 +17,14 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import javax.sql.DataSource;
 
 /**
- * @ClassName DataSourceProxyConfig
+ * @ClassName AppstoreDataSourceConfig
  * @Author shenbohu
  * @Date 2021/12/292:33 PM
  * @Version 1.0
  **/
 @Configuration
-@MapperScan(basePackages = "com.bohu.mapper",sqlSessionTemplateRef = "businessSqlSessionTemplate")
-public class DataSourceProxyConfig {
+@MapperScan(basePackages = "com.bohu.dao.Business",sqlSessionTemplateRef = "businessSqlSessionTemplate")
+public class BusinessDataSourceConfig {
 
     @Bean(name="businessDataSource")
     @ConfigurationProperties(prefix = "spring.datasource.business")
@@ -43,7 +43,6 @@ public class DataSourceProxyConfig {
         SqlSessionFactory sqlSessionFactory = sqlSessionFactoryBean.getObject();
         sqlSessionFactory.getConfiguration().setMapUnderscoreToCamelCase(true);
         return sqlSessionFactory;
-
 
     }
 

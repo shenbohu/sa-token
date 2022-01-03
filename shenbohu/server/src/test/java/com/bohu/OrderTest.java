@@ -1,7 +1,6 @@
 package com.bohu;
 
 import com.bohu.dao.Appstore.OrderMapper;
-import com.bohu.dao.Sharding.TUserMapper;
 import com.bohu.pojo.Order;
 import com.bohu.pojo.TUser;
 import org.junit.Test;
@@ -23,8 +22,6 @@ public class OrderTest {
      @Autowired
      OrderMapper orderMapper;
 
-    @Autowired
-    TUserMapper tUserMapper;
 
 
     @Test
@@ -36,7 +33,7 @@ public class OrderTest {
             TUser tUser = new TUser();
             tUser.setName("11111");
 
-            tUserMapper.insert(tUser);
+
         }
 
 

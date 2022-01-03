@@ -1,14 +1,14 @@
-spring.datasource.appstore.driver-class-name: com.mysql.cj.jdbc.Driver
-spring.datasource.appstore.username: root
-spring.datasource.appstore.jdbc-url: jdbc:mysql://localhost:3306/bohu?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
-#   url: jdbc:mysql://10.211.55.8:3306/bohu?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
-spring.datasource.appstore.password: bohu0812
-
-spring.datasource.business.driver-class-name: com.mysql.cj.jdbc.Driver
-spring.datasource.business.username: root
-spring.datasource.business.jdbc-url: jdbc:mysql://localhost:3306/business?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
-#   url: jdbc:mysql://10.211.55.8:3306/bohu?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
-spring.datasource.business.password: bohu0812
-
-
+spring:
+  datasource:
+    names: appstore , business
+    appstore:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      username: root
+      password: bohu0812
+      jdbc-url: jdbc:mysql://localhost:3306/appstore?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+    business:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      username: root
+      password: bohu0812
+      jdbc-url: jdbc:mysql://localhost:3306/business?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
 

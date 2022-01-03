@@ -8,7 +8,7 @@ spring:
       seata:
         tx-service-group: test_tx_group
   profiles:
-    active: redis,satoken,wecah,aliyun ,mysql
+    active: redis,satoken,wecah,aliyun ,mysql ,sharding
 eureka:
   client:
     service-url:

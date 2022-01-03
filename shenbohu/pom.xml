@@ -19,6 +19,7 @@
         <module>gateway</module>
         <module>business</module>
         <module>nacos</module>
+        <module>sharding</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>

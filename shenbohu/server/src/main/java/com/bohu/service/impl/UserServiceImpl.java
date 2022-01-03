@@ -5,21 +5,17 @@ import cn.dev33.satoken.secure.SaSecureUtil;
 import cn.dev33.satoken.session.SaSession;
 import cn.dev33.satoken.stp.SaTokenInfo;
 import cn.dev33.satoken.stp.StpUtil;
-//import com.baomidou.dynamic.datasource.annotation.DS;
 import com.bohu.dao.Appstore.OrderMapper;
 import com.bohu.dao.Appstore.RightMapper;
 import com.bohu.dao.Appstore.RoleMapper;
 import com.bohu.dao.Appstore.UserMapper;
 import com.bohu.dao.Business.CorditsMapper;
+import com.bohu.dao.Sharding.CourseMapper;
 import com.bohu.entity.PageResult;
 import com.bohu.entity.Result;
 import com.bohu.entity.YmlConfig;
 import com.bohu.feign.corditsfeign;
-import com.bohu.feign.pojo.cordits;
-import com.bohu.pojo.Cordits;
-import com.bohu.pojo.Order;
-import com.bohu.pojo.Role;
-import com.bohu.pojo.User;
+import com.bohu.pojo.*;
 import com.bohu.service.UserService;
 import com.bohu.utils.SMSUtils;
 import com.bohu.utils.StatusCode;
@@ -30,13 +26,10 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import lombok.Data;
 import lombok.SneakyThrows;
-import org.bouncycastle.jcajce.provider.digest.MD5;
+import org.apache.ibatis.annotations.Lang;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 import org.springframework.util.StringUtils;
 
@@ -76,8 +69,8 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private OrderMapper orderMapper;
 
-
-
+    @Autowired
+    private CourseMapper courseMapper;
 
     @Override
     public PageResult findAll(String pageNum, String pageSize) {
@@ -94,7 +87,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     //@GlobalTransactional
-   //@DS("gits_sharding")
     public Result createUser(User user) {
         try {
             if (StringUtils.isEmpty(user.getPassword())) {
@@ -103,7 +95,7 @@ public class UserServiceImpl implements UserService {
             user.setPassword(SaSecureUtil.md5(user.getPassword()));
             user.setCreated(new Date());
             user.setStatus("0");
-            userMapper.insertSelective(user);
+           // userMapper.insertSelective(user);
             Cordits cordits = new Cordits();
             cordits.setUserid(user.getUsername());
             cordits.setNum("30");
@@ -111,14 +103,38 @@ public class UserServiceImpl implements UserService {
             //corditsfeign.createcrodits(cordits);
             corditsMapper.insert(cordits);
 
-            for (int i = 0; i < 10; i++) {
-                Order order = new Order();
-                order.setType("111");
-                order.setOid(Integer.toString(i));
-                orderMapper.insert(order);
+            List<Long> j = new ArrayList<>();
+            for (int i = 0; i < 100; i++) {
+                Course course = new Course();
+                //cid由我们设置的策略，雪花算法进行生成
+                course.setCname("python");
+                //分库根据user_id
+//                course.setCid(10l);
+                course.setUserId(100L);
+                course.setStatus("Normal");
+
+                course.setCname("python");
+                courseMapper.insert(course);
+                //分库根据user_id
+//                course.setCid(10l);
+                course.setUserId(200L);
+                course.setStatus("Normal");
+                courseMapper.insert(course);
+
+                j.add(course.getCid());
+                course.setCname("c++");
+                course.setUserId(111L);
+                courseMapper.insert(course);
+                j.add(course.getCid());
+
+                j.add(course.getCid());
+                course.setCname("c++");
+                course.setUserId(113L);
+                courseMapper.insert(course);
+                j.add(course.getCid());
             }
 
-
+            System.out.println(j.toString());
         } catch (Exception e) {
             e.printStackTrace();
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();

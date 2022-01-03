@@ -1,22 +1,18 @@
 package com.bohu.service.impl;
 
 
-import com.bohu.dao.CorditsMapper;
+import com.bohu.dao.Business.CorditsMapper;
 import com.bohu.pojo.Cordits;
 import com.bohu.service.CorditsService;
 
-import com.bohu.utils.MD5Utils;
 import lombok.Data;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import sun.security.provider.MD5;
 
 
 import javax.annotation.Resource;
 import java.util.UUID;
-
-import static org.apache.tomcat.jni.Time.sleep;
 
 
 /**

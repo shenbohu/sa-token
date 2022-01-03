@@ -1,6 +1,6 @@
 spring:
   datasource:
-    names: appstore , business
+    names: appstore , business ,ds0 ,ds1
     appstore:
       driver-class-name: com.mysql.cj.jdbc.Driver
       username: root
