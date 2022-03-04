@@ -2,6 +2,8 @@ package com.bohu.pojo;
 
 import lombok.Data;
 
+import java.util.Date;
+
 /**
  * @ClassName Course
  * @Author shenbohu
@@ -15,4 +17,5 @@ public class   Course {
     private String cname;
     private Long userId;
     private String status;
+    private Date ctime;
 }

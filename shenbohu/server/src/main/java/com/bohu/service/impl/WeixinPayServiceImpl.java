@@ -3,7 +3,6 @@ package com.bohu.service.impl;
 
 import com.bohu.entity.MessageConstant;
 import com.bohu.entity.Result;
-import com.bohu.entity.ResultEnum;
 import com.bohu.service.WeixinPayService;
 import com.bohu.utils.HttpClient;
 import com.bohu.utils.MatrixToImageWriterWithLogo;
@@ -19,7 +18,6 @@ import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.HashMap;

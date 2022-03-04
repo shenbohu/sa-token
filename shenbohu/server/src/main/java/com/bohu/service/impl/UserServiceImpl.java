@@ -26,7 +26,6 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import lombok.Data;
 import lombok.SneakyThrows;
-import org.apache.ibatis.annotations.Lang;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
@@ -66,8 +65,6 @@ public class UserServiceImpl implements UserService {
     @Resource
     private CorditsMapper corditsMapper;
 
-    @Autowired
-    private OrderMapper orderMapper;
 
     @Autowired
     private CourseMapper courseMapper;
@@ -95,7 +92,7 @@ public class UserServiceImpl implements UserService {
             user.setPassword(SaSecureUtil.md5(user.getPassword()));
             user.setCreated(new Date());
             user.setStatus("0");
-           // userMapper.insertSelective(user);
+            userMapper.insertSelective(user);
             Cordits cordits = new Cordits();
             cordits.setUserid(user.getUsername());
             cordits.setNum("30");
@@ -103,38 +100,39 @@ public class UserServiceImpl implements UserService {
             //corditsfeign.createcrodits(cordits);
             corditsMapper.insert(cordits);
 
-            List<Long> j = new ArrayList<>();
+
             for (int i = 0; i < 100; i++) {
                 Course course = new Course();
                 //cid由我们设置的策略，雪花算法进行生成
-                course.setCname("python");
                 //分库根据user_id
 //                course.setCid(10l);
                 course.setUserId(100L);
-                course.setStatus("Normal");
-
-                course.setCname("python");
+                course.setCname("库1");
+                course.setCtime(new Date());
+                course.setStatus("1");
                 courseMapper.insert(course);
                 //分库根据user_id
 //                course.setCid(10l);
                 course.setUserId(200L);
-                course.setStatus("Normal");
+                course.setStatus("库1");
+                course.setCtime(new Date());
+                course.setStatus("2");
                 courseMapper.insert(course);
 
-                j.add(course.getCid());
-                course.setCname("c++");
-                course.setUserId(111L);
+                course.setCname("库2");
+                course.setUserId(117L);
+                course.setCtime(new Date());
+                course.setStatus("1");
                 courseMapper.insert(course);
-                j.add(course.getCid());
 
-                j.add(course.getCid());
-                course.setCname("c++");
+                course.setCname("库2");
                 course.setUserId(113L);
+                course.setCtime(new Date());
+                course.setStatus("2");
                 courseMapper.insert(course);
-                j.add(course.getCid());
+
             }
 
-            System.out.println(j.toString());
         } catch (Exception e) {
             e.printStackTrace();
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();

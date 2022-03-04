@@ -2,10 +2,6 @@ package com.bohu.controller;
 
 
 import cn.dev33.satoken.annotation.SaCheckLogin;
-import cn.dev33.satoken.annotation.SaCheckPermission;
-import cn.dev33.satoken.annotation.SaCheckRole;
-import cn.dev33.satoken.stp.StpUtil;
-import cn.dev33.satoken.util.SaTokenConsts;
 import com.bohu.entity.PageResult;
 import com.bohu.entity.Result;
 import com.bohu.pojo.User;
@@ -43,7 +39,7 @@ private static final Log log = LogFactory.getLog(UserController.class);
      **/
 
     @GetMapping(value = "users/{pageNum}/{pageSize}")
-    @SaCheckLogin
+    //@SaCheckLogin
     public PageResult findAll(@PathVariable("pageNum") String pageNum, @PathVariable("pageSize") String pageSize) {
         return userService.findAll(pageNum, pageSize);
     }

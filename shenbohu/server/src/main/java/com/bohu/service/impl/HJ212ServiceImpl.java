@@ -1,6 +1,5 @@
 package com.bohu.service.impl;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.bohu.pojo.User;
 import org.springframework.beans.factory.annotation.Autowired;
