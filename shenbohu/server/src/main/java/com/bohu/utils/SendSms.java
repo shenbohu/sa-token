@@ -31,7 +31,7 @@ public class SendSms {
              * 你也可以直接在代码中写死密钥对，但是小心不要将代码复制、上传或者分享给他人，
              * 以免泄露密钥对危及你的财产安全。
              * SecretId、SecretKey 查询: https://console.cloud.tencent.com/cam/capi */
-            Credential cred = new Credential("AKIDJQHrACxRgfOq2xby4tRiiRu60f4C2jAL", "vay5vUmoY1EASTCfrmQownNgphIelcCV");
+            Credential cred = new Credential("***", "***");
 
             // 实例化一个http选项，可选，没有特殊需求可以跳过
             HttpProfile httpProfile = new HttpProfile();
@@ -71,11 +71,11 @@ public class SendSms {
              * sms helper: https://cloud.tencent.com/document/product/382/3773 */
 
             /* 短信应用ID: 短信SdkAppId在 [短信控制台] 添加应用后生成的实际SdkAppId，示例如1400006666 */
-            String sdkAppId = "1400637309";
+            String sdkAppId = "***";
             req.setSmsSdkAppId(sdkAppId);
 
             /* 短信签名内容: 使用 UTF-8 编码，必须填写已审核通过的签名，签名信息可登录 [短信控制台] 查看 */
-            String signName = "希盟泰克";
+            String signName = "***";
             req.setSignName(signName);
 
             /* 国际/港澳台短信 SenderId: 国内短信填空，默认未开通，如需开通请联系 [sms helper] */
@@ -91,7 +91,7 @@ public class SendSms {
             req.setExtendCode(extendCode);
 
             /* 模板 ID: 必须填写已审核通过的模板 ID。模板ID可登录 [短信控制台] 查看 */
-            String templateId = "1313229";
+            String templateId = "***";
             req.setTemplateId(templateId);
 
             /* 下发手机号码，采用 E.164 标准，+[国家或地区码][手机号]
