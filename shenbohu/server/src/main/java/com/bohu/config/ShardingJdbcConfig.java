@@ -35,7 +35,7 @@ import java.util.*;
 
 //分库分表
 @Configuration
-@MapperScan(basePackages = "com.bohu.dao.AppstoreSharding",sqlSessionTemplateRef = "ShardingSqlSessionTemplate")
+@MapperScan(basePackages = "com.bohu.dao.Sharding",sqlSessionTemplateRef = "ShardingSqlSessionTemplate")
 public class ShardingJdbcConfig {
 
     @Bean(name="m1")
@@ -95,7 +95,7 @@ public class ShardingJdbcConfig {
     public SqlSessionFactory sqlSessionFactory (@Qualifier("shardingdataSource") DataSource dataSource) throws  Exception{
         SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
         sqlSessionFactoryBean.setDataSource(new DataSourceProxy(dataSource));
-        sqlSessionFactoryBean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath:mapper/AppstoreSharding/*.xml"));
+        sqlSessionFactoryBean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath:mapper/Sharding/*.xml"));
        // sqlSessionFactoryBean.setTypeAliasesPackage("com.bohu.pojo");
 //        sqlSessionFactoryBean.setTransactionFactory(new SpringManagedTransactionFactory());
 //        SqlSessionFactory sqlSessionFactory = sqlSessionFactoryBean.getObject();
