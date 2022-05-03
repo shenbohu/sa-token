@@ -18,7 +18,7 @@ import javax.annotation.Resource;
 @RestController
 @RequestMapping("/hj212")
 @CrossOrigin // 解决跨域
-public class HJ212Controller {
+public class RestTemplateController {
     @Resource
     private HJ212Service hj212Service;
 
