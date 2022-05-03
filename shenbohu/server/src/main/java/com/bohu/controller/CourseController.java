@@ -4,8 +4,6 @@ package com.bohu.controller;
 import cn.dev33.satoken.annotation.SaCheckLogin;
 import com.bohu.entity.PageResult;
 import com.bohu.service.CourseService;
-import org.apache.juli.logging.Log;
-import org.apache.juli.logging.LogFactory;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -13,9 +11,8 @@ import javax.annotation.Resource;
 
 @RestController
 @RequestMapping("/course")
-class CourseController {
+public class CourseController {
 
-    private static final Log log = LogFactory.getLog(CourseController.class);
     @Resource
     private CourseService courseService;
 

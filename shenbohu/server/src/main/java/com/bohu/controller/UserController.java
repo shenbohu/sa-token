@@ -7,8 +7,6 @@ import com.bohu.entity.Result;
 import com.bohu.pojo.User;
 import com.bohu.service.UserService;
 import com.bohu.vo.UserVO;
-import org.apache.juli.logging.Log;
-import org.apache.juli.logging.LogFactory;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -18,7 +16,6 @@ import javax.annotation.Resource;
 @RequestMapping("/user")
 class UserController {
 
-private static final Log log = LogFactory.getLog(UserController.class);
     @Resource
     private UserService userService;
 
