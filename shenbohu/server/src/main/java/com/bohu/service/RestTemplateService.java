@@ -3,7 +3,7 @@ package com.bohu.service;
 
 import com.bohu.entity.PageResult;
 
-public interface HJ212Service {
+public interface RestTemplateService {
 
 
     PageResult gethj212();

@@ -9,15 +9,19 @@ spring:
     alibaba:
       seata:
         tx-service-group: test_tx_group
+    nacos:
+      discovery:
+        #指定nacos注册中心地址
+        server-addr: 127.0.0.1:8848
     loadbalancer:
       retry:
         enabled: false
-eureka:
-  client:
-    service-url:
-      defaultZone: http://127.0.0.1:6868/eureka
-  instance:
-    prefer-ip-address: true
+#eureka:
+#  client:
+#    service-url:
+#      defaultZone: http://127.0.0.1:6868/eureka
+#  instance:
+#    prefer-ip-address: true
 feign:
   hystrix:
     enabled: false
@@ -30,6 +34,7 @@ mybatis:
 #  level:
 #    com: debug  # 不加这个MyBatis Log插件不打印sql语句   trace info warn error debug
 
-
+autoconfigure:
+  exclude: org.springframework.cloud.netflix.eureka.EurekaClientAutoConfiguration #排除eureka注册中心
 
 

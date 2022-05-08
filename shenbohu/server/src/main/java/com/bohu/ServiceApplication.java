@@ -9,7 +9,6 @@ import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
-import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import tk.mybatis.spring.annotation.MapperScan;
@@ -18,7 +17,7 @@ import tk.mybatis.spring.annotation.MapperScan;
 
 @SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
 //@SpringBootApplication(exclude = SpringBootConfiguration.class)
-@EnableEurekaClient //开启Eureka客户端
+//@EnableEurekaClient //开启Eureka客户端
 //@MapperScan("com.bohu.dao")
 @EnableFeignClients(basePackages = "com.bohu.feign")
 @EnableDiscoveryClient

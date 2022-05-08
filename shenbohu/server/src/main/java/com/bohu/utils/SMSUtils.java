@@ -7,7 +7,7 @@ import com.aliyuncs.dysmsapi.model.v20170525.SendSmsResponse;
 import com.aliyuncs.http.MethodType;
 import com.aliyuncs.profile.DefaultProfile;
 import com.aliyuncs.profile.IClientProfile;
-import com.netflix.client.ClientException;
+//import com.netflix.client.ClientException;
 import lombok.Data;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Value;
@@ -41,7 +41,7 @@ public class SMSUtils implements InitializingBean {
      *
      * @param phoneNumbers
      * @param param
-     * @throws ClientException
+//     * @throws ClientException
      */
     public static boolean sendShortMessage(String templateCode, String phoneNumbers, String param ,String SignName) {
         // 设置超时时间-可自行调整

@@ -11,6 +11,22 @@
 
     <artifactId>business</artifactId>
     <dependencies>
+
+        <!--   SpringCloud依赖-->
+        <!--  alibaba cloud -->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+            <version>2.1.2.RELEASE</version>
+            <type>pom</type>
+            <scope>import</scope>
+        </dependency>
+        <!--nacos-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+            <version>0.9.0.RELEASE</version>
+        </dependency>
         <!--web起步依赖-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -22,10 +38,10 @@
             <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
         <!--eureka-client-->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.cloud</groupId>-->
+<!--            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>-->
+<!--        </dependency>-->
         <!--openfeign-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>

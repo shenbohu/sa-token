@@ -3,7 +3,7 @@ package com.bohu.controller;
 
 import cn.dev33.satoken.annotation.SaCheckLogin;
 import com.bohu.entity.PageResult;
-import com.bohu.service.HJ212Service;
+import com.bohu.service.RestTemplateService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -20,7 +20,7 @@ import javax.annotation.Resource;
 @CrossOrigin // 解决跨域
 public class RestTemplateController {
     @Resource
-    private HJ212Service hj212Service;
+    private RestTemplateService hj212Service;
 
     @GetMapping(value = "gethj212")
     @SaCheckLogin

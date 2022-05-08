@@ -65,7 +65,9 @@ public class AppstoreSharding {
         SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
         sqlSessionFactoryBean.setDataSource(new DataSourceProxy(dataSource));
         sqlSessionFactoryBean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath:mapper/Appstore/*.xml"));
-        return sqlSessionFactoryBean.getObject();
+        SqlSessionFactory sqlSessionFactory = sqlSessionFactoryBean.getObject();
+        sqlSessionFactory.getConfiguration().setMapUnderscoreToCamelCase(true);
+        return sqlSessionFactory;
 
     }
 

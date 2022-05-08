@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import com.bohu.entity.PageResult;
 import com.bohu.entity.YmlConfig;
 
-import com.bohu.service.HJ212Service;
+import com.bohu.service.RestTemplateService;
 import lombok.Data;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,7 +25,7 @@ import org.springframework.web.client.RestTemplate;
 @Transactional
 @Configuration
 @Data
-public class HJ212ServiceImpl implements HJ212Service {
+public class RestTemplateServiceImpl implements RestTemplateService {
 
 
     @Autowired
