@@ -4,6 +4,7 @@ package com.bohu;
 import cn.dev33.satoken.SaManager;
 //import cn.dev33.satoken.quick.SaQuickManager;
 //import org.apache.shardingsphere.shardingjdbc.spring.boot.SpringBootConfiguration;
+import com.alibaba.nacos.spring.context.annotation.config.NacosPropertySource;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

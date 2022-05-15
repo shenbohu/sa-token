@@ -7,15 +7,15 @@ spring:
         driver-class-name: com.mysql.cj.jdbc.Driver
         password: bohu0812
         type: com.alibaba.druid.pool.DruidDataSource
-        url: jdbc:mysql://localhost:3306/edu_db_1?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
-        jdbc-url: jdbc:mysql://localhost:3306/edu_db_1?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+        url: jdbc:mysql://10.211.55.15:3306/edu_db_1?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+        jdbc-url: jdbc:mysql://10.211.55.15:3306/edu_db_1?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
         username: root
       m2:
         driver-class-name: com.mysql.cj.jdbc.Driver
         password: bohu0812
         type: com.alibaba.druid.pool.DruidDataSource
-        jdbc-url: jdbc:mysql://localhost:3306/edu_db_2?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
-        url: jdbc:mysql://localhost:3306/edu_db_2?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+        jdbc-url: jdbc:mysql://10.211.55.15:3306/edu_db_2?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+        url: jdbc:mysql://10.211.55.15:3306/edu_db_2?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
         username: root
 #下面的配置不生效  自动加载mysql生效
       names: m1,m2

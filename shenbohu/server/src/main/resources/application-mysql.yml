@@ -5,15 +5,15 @@ spring:
       driver-class-name: com.mysql.cj.jdbc.Driver
       username: root
       password: bohu0812
-      jdbc-url: jdbc:mysql://localhost:3306/appstore?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+      jdbc-url: jdbc:mysql://10.211.55.15:3306/appstore?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
     business:
       driver-class-name: com.mysql.cj.jdbc.Driver
       username: root
       password: bohu0812
-      jdbc-url: jdbc:mysql://localhost:3306/business?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+      jdbc-url: jdbc:mysql://10.211.55.15:3306/business?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
     appstore1:
       driver-class-name: com.mysql.cj.jdbc.Driver
       username: root
       password: bohu0812
-      jdbc-url: jdbc:mysql://localhost:3306/business?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+      jdbc-url: jdbc:mysql://10.211.55.15:3307/appstore?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
 
